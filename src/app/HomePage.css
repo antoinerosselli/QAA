@@ -1,0 +1,52 @@
+/* src/app/HomePage.css */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #2C2F33;
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+    min-height: 100vh;
+  }
+  
+  .home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #23272A;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  h1 {
+    color: #7289DA;
+  }
+  
+  p {
+    color: #99AAB5;
+    margin: 20px 0;
+  }
+  
+  .github-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #5865F2;
+    color: #FFFFFF;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .github-button:hover {
+    background-color: #7289DA;
+  }
+  
+  .github-button img {
+    margin-right: 10px;
+    width: 24px;
+    height: 24px;
+  }
+  

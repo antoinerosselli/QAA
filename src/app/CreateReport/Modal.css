@@ -1,0 +1,63 @@
+/* src/app/CreateReport/Modal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #23272A;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #FFFFFF;
+}
+
+.modal p {
+  color: #99AAB5;
+}
+
+hr {
+  border: 1px solid #5865F2;
+  margin: 10px 0;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  background-color: #5865F2;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.modal-buttons button:hover {
+  background-color: #7289DA;
+}
+
+button.close {
+  background-color: #D9534F;
+}
+
+button.close:hover {
+  background-color: #C9302C;
+}

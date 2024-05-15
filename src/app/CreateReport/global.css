@@ -1,0 +1,113 @@
+/* src/app/CreateReport/globals.css */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #2C2F33;
+    margin: 0;
+    padding: 0;
+    color: #FFFFFF;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #23272A;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h3 {
+    color: #FFFFFF;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+    color: #99AAB5;
+  }
+  
+  input, select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #7289DA;
+    background-color: #2C2F33;
+    color: #FFFFFF;
+  }
+  
+  input::placeholder {
+    color: #99AAB5;
+  }
+  
+  button {
+    background-color: #5865F2;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  button:hover {
+    background-color: #7289DA;
+  }
+  
+  button[type="button"] {
+    background-color: #D9534F;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #C9302C;
+  }
+  
+  button.close {
+    background-color: #D9534F;
+  }
+  
+  button.close:hover {
+    background-color: #C9302C;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal {
+    background: #23272A;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal h2 {
+    margin-top: 0;
+    color: #FFFFFF;
+  }
+  
+  .modal p {
+    color: #99AAB5;
+  }
+  
+  .rank-distribution {
+    display: flex;
+    justify-content: space-between;
+    color: #FFFFFF;
+  }
+  
+  .rank-distribution p {
+    margin: 0 10px;
+  }
+  
