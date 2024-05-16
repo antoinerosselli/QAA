@@ -20,17 +20,17 @@ const Modal = ({ show, handleClose, reportData }) => {
       Type de Test : ${reportData.testType}
       Version du Jeu : ${reportData.gameVersion}
       Temps Passé (heures) : ${reportData.testDuration}
-      Test Terminé : ${reportData.testCompleted}
-
+      
       Bugs :
       ${reportData.items.map((item, index) => `
         Bug ${index + 1} :
         Rank : ${item.rank}
         Titre : ${item.title}
         Lien : ${item.link}
-        ---------------------------`).join('\n')}
+        `).join('\n')}
 
       Informations Complémentaires : ${reportData.additionalInfo}
+      Test Terminé : ${reportData.testCompleted}
 
       Cordialement,
     `;
