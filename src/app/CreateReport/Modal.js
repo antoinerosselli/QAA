@@ -46,6 +46,7 @@ const Modal = ({ show, handleClose, reportData }) => {
       <div style="background: white; color: black; padding: 20px;">
         <p style="color: black;">Bonjour,</p>
         <p style="color: black;">Veuillez trouver ci-dessous les détails du rapport :</p>
+        </br>
         <p style="color: black;">
         <strong>Date :</strong> ${reportData.date}
         </br>
@@ -59,13 +60,16 @@ const Modal = ({ show, handleClose, reportData }) => {
         </br>
         <strong>Test Terminé :</strong> ${reportData.testCompleted}
         </p>
+        </br>
         <p style="color: black;"><strong>Bugs :</strong></p>
+        </br>
         <p style="color: black;"><strong>Résumé :</strong>
         </br>
         <strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}
         </br>
         <strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}
         </p>
+        </br>
         <div style="display: flex; gap: 10px;">
           <p style="color: black;"><strong style="background-color: red;">A:</strong> ${rankCounts.A}</p>
           <p style="color: black;"><strong style="background-color: orange;">B:</strong> ${rankCounts.B}</p>
@@ -82,7 +86,9 @@ const Modal = ({ show, handleClose, reportData }) => {
             <p style="color: black;"><strong>Bloquant :</strong> ${item.isBlocking ? 'Oui' : 'Non'}</p>
           </div>
         `).join('')}
+        </br>
         <p style="color: black;"><strong>Informations Complémentaires :</strong> ${reportData.additionalInfo}</p>
+        </br>
         <p style="color: black;">Cordialement,</p>
       </div>
     `;
