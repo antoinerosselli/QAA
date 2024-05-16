@@ -104,6 +104,7 @@ const CreateReport = () => {
             <option value="Regression">Regression</option>
             <option value="Sanity">Sanity</option>
             <option value="Smoke">Smoke</option>
+            <option value="Functionality">Functionality</option>
           </select>
         </div>
         <div>
