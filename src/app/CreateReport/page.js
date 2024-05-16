@@ -166,7 +166,7 @@ const CreateReport = () => {
           />
         ))}
 
-        <button type="button" onClick={handleAddItem}>Add</button>
+        <button type="button" onClick={handleAddItem}>Ajouter un bug</button>
         <button type="submit">Créer le Rapport</button>
       </form>
       <Modal show={showModal} handleClose={() => setShowModal(false)} reportData={reportData} />
