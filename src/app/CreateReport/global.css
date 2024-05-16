@@ -54,7 +54,7 @@ body {
   }
   
   input::placeholder {
-    color: #99AAB5;
+    color: #000000;
   }
   
   button {
@@ -114,7 +114,7 @@ body {
   }
   
   .modal p {
-    color: #99AAB5;
+    color: #000000;
   }
   
   .rank-distribution {

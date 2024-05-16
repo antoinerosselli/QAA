@@ -21,64 +21,6 @@ const Modal = ({ show, handleClose, reportData }) => {
 
   const rankCounts = countRanks();
 
-  const handleCopy = () => {
-    const content = `
-      <div style="background: white; color: black; padding: 20px;">
-        <p>Bonjour,</p>
-        <p>Veuillez trouver ci-dessous les détails du rapport :</p>
-        </br>
-        <p><strong>Date :</strong> ${reportData.date}</p>
-        <p><strong>Nom du Jeu :</strong> ${reportData.gameName}</p>
-        <p><strong>Type de Test :</strong> ${reportData.testType}</p>
-        <p><strong>Versions du Jeu :</strong> ${reportData.gameVersions.join(', ')}</p>
-        <p><strong>Temps Passé (heures) :</strong> ${reportData.testDuration}</p>
-        <p><strong>Test Terminé :</strong> ${reportData.testCompleted}</p>
-        <br/>
-        <p><strong>Bugs :</strong></p>
-        </br>
-        <p><strong>Résumé :</strong></p>
-        <p><strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}</p>
-        <p><strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}</p>
-        </br>
-        <div style="display: flex; gap: 10px;">
-          <p><strong style="background-color: red;">A:</strong> ${rankCounts.A}</p>
-          <p><strong style="background-color: orange;">B:</strong> ${rankCounts.B}</p>
-          <p><strong style="background-color: yellow;">C:</strong> ${rankCounts.C}</p>
-          <p><strong style="background-color: gray;">D:</strong> ${rankCounts.D}</p>
-        </div>
-        </br>
-        ${reportData.items.map((item, index) => `
-          <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
-            <p><strong>Bug ${index + 1} :</strong></p>
-            <p><strong>Rank :</strong> ${item.rank}</p>
-            <p><strong>Titre :</strong> ${item.title}</p>
-            <p><strong>Lien :</strong> ${item.link}</p>
-            <p><strong>Crash :</strong> ${item.isCrash ? 'Oui' : 'Non'}</p>
-            <p><strong>Bloquant :</strong> ${item.isBlocking ? 'Oui' : 'Non'}</p>
-          </div>
-        `).join('')}
-        </br>
-        <p><strong>Informations Complémentaires :</strong> ${reportData.additionalInfo}</p>
-        </br>
-        <p>Cordialement,</p>
-      </div>
-    `;
-
-    const tempElement = document.createElement('div');
-    tempElement.innerHTML = content;
-    document.body.appendChild(tempElement);
-
-    const range = document.createRange();
-    range.selectNode(tempElement);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    window.getSelection().removeAllRanges();
-    document.body.removeChild(tempElement);
-
-    alert('Le contenu a été copié dans le presse-papiers.');
-  };
-
   const getBorderColor = (rank) => {
     switch (rank) {
       case 'A': return 'red';
@@ -99,48 +41,77 @@ const Modal = ({ show, handleClose, reportData }) => {
     }
   };
 
+  const generateContent = () => {
+    return `
+      <div style="background: white; color: black; padding: 20px;">
+        <p style="color: black;">Bonjour,</p>
+        <p style="color: black;">Veuillez trouver ci-dessous les détails du rapport :</p>
+        <p style="color: black;">
+        <strong>Date :</strong> ${reportData.date}
+        </br>
+        <strong>Nom du Jeu :</strong> ${reportData.gameName}
+        </br>
+        <strong>Type de Test :</strong> ${reportData.testType}
+        </br>
+        <strong>Versions du Jeu :</strong> ${reportData.gameVersions.join(', ')}
+        </br>
+        <strong>Temps Passé (heures) :</strong> ${reportData.testDuration}
+        </br>
+        <strong>Test Terminé :</strong> ${reportData.testCompleted}
+        </p>
+        <p style="color: black;"><strong>Bugs :</strong></p>
+        <p style="color: black;"><strong>Résumé :</strong>
+        </br>
+        <strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}
+        </br>
+        <strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}
+        </p>
+        <div style="display: flex; gap: 10px;">
+          <p style="color: black;"><strong style="background-color: red;">A:</strong> ${rankCounts.A}</p>
+          <p style="color: black;"><strong style="background-color: orange;">B:</strong> ${rankCounts.B}</p>
+          <p style="color: black;"><strong style="background-color: yellow;">C:</strong> ${rankCounts.C}</p>
+          <p style="color: black;"><strong style="background-color: gray;">D:</strong> ${rankCounts.D}</p>
+        </div>
+        ${reportData.items.map((item, index) => `
+          <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
+            <p style="color: black;"><strong>Bug ${index + 1} :</strong></p>
+            <p style="color: black;"><strong>Rank :</strong> ${item.rank}</p>
+            <p style="color: black;"><strong>Titre :</strong> ${item.title}</p>
+            <p style="color: black;"><strong>Lien :</strong> ${item.link}</p>
+            <p style="color: black;"><strong>Crash :</strong> ${item.isCrash ? 'Oui' : 'Non'}</p>
+            <p style="color: black;"><strong>Bloquant :</strong> ${item.isBlocking ? 'Oui' : 'Non'}</p>
+          </div>
+        `).join('')}
+        <p style="color: black;"><strong>Informations Complémentaires :</strong> ${reportData.additionalInfo}</p>
+        <p style="color: black;">Cordialement,</p>
+      </div>
+    `;
+  };
+
+  const handleCopy = () => {
+    const content = generateContent();
+
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = content;
+    document.body.appendChild(tempElement);
+
+    const range = document.createRange();
+    range.selectNode(tempElement);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+    document.body.removeChild(tempElement);
+
+    alert('Le contenu a été copié dans le presse-papiers.');
+  };
+
   return (
     <div className="modal-overlay">
       <div className="modal" ref={contentRef}>
         <div className="modal-content">
           <h2>Preview du Rapport</h2>
-          <p><strong>Bonjour,</strong></p>
-          <p><strong>Veuillez trouver ci-dessous les détails du rapport :</strong></p>
-          <br/>
-          <p><strong>Date :</strong> {reportData.date}</p>
-          <p><strong>Nom du Jeu :</strong> {reportData.gameName}</p>
-          <p><strong>Type de Test :</strong> {reportData.testType}</p>
-          <p><strong>Versions du Jeu :</strong> {reportData.gameVersions.join(', ')}</p>
-          <p><strong>Temps Passé (heures) :</strong> {reportData.testDuration}</p>
-          <p><strong>Test Terminé :</strong> {reportData.testCompleted}</p>
-          <br/>
-          <p><strong>Résumé des Bugs : </strong></p>
-          <p><strong>Bugs Bloquants :</strong> {reportData.items.filter(item => item.isBlocking).length}</p>
-          <p><strong>Bugs Causant des Crashs :</strong> {reportData.items.filter(item => item.isCrash).length}</p>
-          <br/>
-          <p><strong>Détails des Bugs : </strong></p>
-          <br/>
-          <div className="rank-distribution">
-            <p><strong style={{ backgroundColor: 'red' }}>A:</strong> {rankCounts.A}</p>
-            <p><strong style={{ backgroundColor: 'orange' }}>B:</strong> {rankCounts.B}</p>
-            <p><strong style={{ backgroundColor: 'yellow' }}>C:</strong> {rankCounts.C}</p>
-            <p><strong style={{ backgroundColor: 'gray' }}>D:</strong> {rankCounts.D}</p>
-          </div>
-          <br/>
-          {reportData.items.map((item, index) => (
-            <div key={index} style={{ border: `2px solid ${getBorderColor(item.rank)}`, background: getBackgroundColor(item.rank), padding: '10px', marginBottom: '10px' }}>
-              <p><strong>Bug {index + 1} :</strong></p>
-              <p><strong>Rank :</strong> {item.rank}</p>
-              <p><strong>Titre :</strong> {item.title}</p>
-              <p><strong>Lien :</strong> {item.link}</p>
-              <p><strong>Crash :</strong> {item.isCrash ? 'Oui' : 'Non'}</p>
-              <p><strong>Bloquant :</strong> {item.isBlocking ? 'Oui' : 'Non'}</p>
-            </div>
-          ))}
-          <br/>
-          <p><strong>Informations Complémentaires :</strong> {reportData.additionalInfo}</p>
-          <br/>
-          <p><strong>Cordialement,</strong></p>
+          <div dangerouslySetInnerHTML={{ __html: generateContent() }} />
           <div className="modal-buttons">
             <button onClick={handleClose}>Fermer</button>
             <button onClick={handleCopy}>Copier</button>
