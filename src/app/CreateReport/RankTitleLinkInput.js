@@ -1,7 +1,7 @@
 // src/app/CreateReport/RankTitleLinkInput.js
 import React from 'react';
 
-const RankTitleLinkInput = ({ index, rank, title, link, setRank, setTitle, setLink, handleRemove }) => {
+const RankTitleLinkInput = ({ index, rank, title, link, isCrash, isBlocking, setRank, setTitle, setLink, setIsCrash, setIsBlocking, handleRemove }) => {
   return (
     <div className="item">
       <h3>Bug {index + 1}</h3>
@@ -31,7 +31,25 @@ const RankTitleLinkInput = ({ index, rank, title, link, setRank, setTitle, setLi
           onChange={(e) => setLink(index, e.target.value)} 
         />
       </div>
-      <button type="button" onClick={() => handleRemove(index)}>Remove</button>
+      <div className="checkbox-container">
+        <label className="checkbox-label">
+          <input 
+            type="checkbox" 
+            checked={isCrash} 
+            onChange={(e) => setIsCrash(index, e.target.checked)} 
+          />
+          Crash
+        </label>
+        <label className="checkbox-label">
+          <input 
+            type="checkbox" 
+            checked={isBlocking} 
+            onChange={(e) => setIsBlocking(index, e.target.checked)} 
+          />
+          Bloquant
+        </label>
+      </div>
+      <button type="button" onClick={() => handleRemove(index)} className="remove-button">Remove</button>
       <br/>
       <br/>
     </div>

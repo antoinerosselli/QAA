@@ -1,3 +1,4 @@
+// src/app/CreateReport/page.js
 "use client";  // Indique que ce fichier doit être exécuté côté client
 
 import React, { useState, useEffect } from 'react';
@@ -9,7 +10,7 @@ const CreateReport = () => {
   const [date, setDate] = useState('');
   const [gameName, setGameName] = useState('');
   const [testType, setTestType] = useState('');
-  const [gameVersion, setGameVersion] = useState('');
+  const [gameVersions, setGameVersions] = useState([]);
   const [testDuration, setTestDuration] = useState('');
   const [testCompleted, setTestCompleted] = useState(''); // Pour indiquer si le test est terminé
   const [additionalInfo, setAdditionalInfo] = useState(''); // Pour des informations complémentaires
@@ -23,7 +24,7 @@ const CreateReport = () => {
   }, []);
 
   const handleAddItem = () => {
-    setItems([...items, { rank: '', title: '', link: '' }]);
+    setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false }]);
   };
 
   const handleRemoveItem = (index) => {
@@ -49,13 +50,25 @@ const CreateReport = () => {
     setItems(newItems);
   };
 
+  const handleCrashChange = (index, value) => {
+    const newItems = [...items];
+    newItems[index].isCrash = value;
+    setItems(newItems);
+  };
+
+  const handleBlockingChange = (index, value) => {
+    const newItems = [...items];
+    newItems[index].isBlocking = value;
+    setItems(newItems);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const reportData = {
       date,
       gameName,
       testType,
-      gameVersion,
+      gameVersions,
       testDuration,
       testCompleted,
       additionalInfo,
@@ -63,6 +76,17 @@ const CreateReport = () => {
     };
     setReportData(reportData);
     setShowModal(true);
+  };
+
+  const handleGameVersionsChange = (e) => {
+    const options = e.target.options;
+    const selectedVersions = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        selectedVersions.push(options[i].value);
+      }
+    }
+    setGameVersions(selectedVersions);
   };
 
   const countRanks = () => {
@@ -109,11 +133,16 @@ const CreateReport = () => {
         </div>
         <div>
           <label>Version du Jeu:</label>
-          <input 
-            type="text" 
-            value={gameVersion} 
-            onChange={(e) => setGameVersion(e.target.value)} 
-          />
+          <select multiple value={gameVersions} onChange={handleGameVersionsChange}>
+            <option value="PS4">PS4</option>
+            <option value="PS5">PS5</option>
+            <option value="XBOX SERIES">XBOX SERIES</option>
+            <option value="XBOX ONE">XBOX ONE</option>
+            <option value="STEAM">STEAM</option>
+            <option value="GOG">GOG</option>
+            <option value="EPIC">EPIC</option>
+            <option value="SWITCH">SWITCH</option>
+          </select>
         </div>
         <div>
           <label>Temps Passé (heures):</label>
@@ -133,26 +162,25 @@ const CreateReport = () => {
         </div>
         <div>
           <label>Informations Complémentaires:</label>
-          <input 
-            type="text" 
+          <textarea 
             value={additionalInfo} 
             onChange={(e) => setAdditionalInfo(e.target.value)} 
             placeholder="Optionnel"
-          />
+            rows="4"
+            style={{ width: '100%', color: 'black' }}
+          ></textarea>
         </div>
-
+        <br/>
         <div>
-          <h3>Répartition des Types de Rang:</h3>
-          <br/>
           <div className="rank-distribution">
-            <p>A: {rankCounts.A}</p>
-            <p>B: {rankCounts.B}</p>
-            <p>C: {rankCounts.C}</p>
-            <p>D: {rankCounts.D}</p>
+            <p><strong style={{ backgroundColor: 'red' }}>A:</strong> {rankCounts.A}</p>
+            <p><strong style={{ backgroundColor: 'orange' }}>B:</strong> {rankCounts.B}</p>
+            <p><strong style={{ backgroundColor: 'yellow' }}>C:</strong> {rankCounts.C}</p>
+            <p><strong style={{ backgroundColor: 'gray' }}>D:</strong> {rankCounts.D}</p>
           </div>
         </div>
         <br/>
-        
+        <br/>
         {items.map((item, index) => (
           <RankTitleLinkInput
             key={index}
@@ -160,9 +188,13 @@ const CreateReport = () => {
             rank={item.rank}
             title={item.title}
             link={item.link}
+            isCrash={item.isCrash}
+            isBlocking={item.isBlocking}
             setRank={handleRankChange}
             setTitle={handleTitleChange}
             setLink={handleLinkChange}
+            setIsCrash={handleCrashChange}
+            setIsBlocking={handleBlockingChange}
             handleRemove={handleRemoveItem}
           />
         ))}

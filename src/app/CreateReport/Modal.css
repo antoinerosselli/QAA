@@ -12,21 +12,36 @@
 }
 
 .modal {
-  background: #23272A;
+  background: white; /* Changement du fond en blanc */
+  color: black; /* Changement de la couleur du texte en noir */
   padding: 20px;
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
+  max-height: 90%; /* Pour permettre le défilement si la modal est grande */
+  overflow-y: auto; /* Permettre le défilement vertical */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content {
+  background: white; /* Changement du fond en blanc */
+  color: black; /* Changement de la couleur du texte en noir */
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .modal h2 {
   margin-top: 0;
-  color: #FFFFFF;
+  color: black;
 }
 
 .modal p {
-  color: #99AAB5;
+  color: black;
+}
+
+.rank-distribution {
+  display: flex;
+  gap: 10px;
 }
 
 hr {

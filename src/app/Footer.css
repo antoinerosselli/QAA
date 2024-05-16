@@ -1,0 +1,18 @@
+/* src/app/Footer.css */
+.footer {
+    background-color: #2C2F33; 
+    color: #FFFFFF; 
+    text-align: center; 
+    padding: 20px 0; 
+    font-size: 1px;
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Ombre pour un léger effet de profondeur */
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 16px;
+  }
+  
