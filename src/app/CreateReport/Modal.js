@@ -78,7 +78,6 @@ const Modal = ({ show, handleClose, reportData }) => {
         </div>
         ${reportData.items.map((item, index) => `
           <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
-            <p style="color: black;"><strong>Bug ${index + 1} :</strong></p>
             <p style="color: black;"><strong>Rank :</strong> ${item.rank}</p>
             <p style="color: black;"><strong>Titre :</strong> ${item.title}</p>
             <p style="color: black;"><strong>Lien :</strong> ${item.link}</p>
