@@ -46,38 +46,30 @@ const Modal = ({ show, handleClose, reportData }) => {
       <div style="background: white; color: black; padding: 20px;">
         <p style="color: black;">Bonjour,</p>
         <p style="color: black;">Veuillez trouver ci-dessous les détails du rapport :</p>
-        </br>
-        <p style="color: black;">
-        <strong>Date :</strong> ${reportData.date}
-        </br>
-        <strong>Nom du Jeu :</strong> ${reportData.gameName}
-        </br>
-        <strong>Type de Test :</strong> ${reportData.testType}
-        </br>
-        <strong>Versions du Jeu :</strong> ${reportData.gameVersions.join(', ')}
-        </br>
-        <strong>Temps Passé (heures) :</strong> ${reportData.testDuration}
-        </br>
-        <strong>Test Terminé :</strong> ${reportData.testCompleted}
-        </p>
-        </br>
+        <p style="color: black;"><strong>Date :</strong> ${reportData.date}</p>
+        <p style="color: black;"><strong>Nom du Jeu :</strong> ${reportData.gameName}</p>
+        <p style="color: black;"><strong>Type de Test :</strong> ${reportData.testType}</p>
+        <p style="color: black;"><strong>Numéro de Version du Jeu :</strong> ${reportData.gameVersionNumber}</p>
+        <p style="color: black;"><strong>Versions du Jeu :</strong> ${reportData.gameVersions.join(', ')}</p>
+        <p style="color: black;"><strong>Temps Passé (heures) :</strong> ${reportData.testDuration}</p>
+        <p style="color: black;"><strong>Test Terminé :</strong> ${reportData.testCompleted}</p>
+        <br/>
         <p style="color: black;"><strong>Bugs :</strong></p>
-        </br>
-        <p style="color: black;"><strong>Résumé :</strong>
-        </br>
-        <strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}
-        </br>
-        <strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}
-        </p>
-        </br>
-        <div style="display: flex; gap: 10px;">
+        <br/>
+        <p style="color: black;"><strong>Résumé :</strong></p>
+        <p style="color: black;"><strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}</p>
+        <p style="color: black;"><strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}</p>
+        <br/>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <p style="color: black;"><strong style="background-color: red;">A:</strong> ${rankCounts.A}</p>
           <p style="color: black;"><strong style="background-color: orange;">B:</strong> ${rankCounts.B}</p>
           <p style="color: black;"><strong style="background-color: yellow;">C:</strong> ${rankCounts.C}</p>
           <p style="color: black;"><strong style="background-color: gray;">D:</strong> ${rankCounts.D}</p>
         </div>
+        <br/>
         ${reportData.items.map((item, index) => `
-          <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
+          <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px; display: inline-block; width: calc(50% - 10px); box-sizing: border-box;">
+            <p style="color: black;"><strong>Bug ${index + 1} :</strong></p>
             <p style="color: black;"><strong>Rank :</strong> ${item.rank}</p>
             <p style="color: black;"><strong>Titre :</strong> ${item.title}</p>
             <p style="color: black;"><strong>Lien :</strong> ${item.link}</p>
@@ -85,9 +77,9 @@ const Modal = ({ show, handleClose, reportData }) => {
             <p style="color: black;"><strong>Bloquant :</strong> ${item.isBlocking ? 'Oui' : 'Non'}</p>
           </div>
         `).join('')}
-        </br>
+        <br/>
         <p style="color: black;"><strong>Informations Complémentaires :</strong> ${reportData.additionalInfo}</p>
-        </br>
+        <br/>
         <p style="color: black;">Cordialement,</p>
       </div>
     `;
