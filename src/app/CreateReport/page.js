@@ -10,6 +10,7 @@ const CreateReport = () => {
   const [date, setDate] = useState('');
   const [gameName, setGameName] = useState('');
   const [testType, setTestType] = useState('');
+  const [gameVersionNumber, setGameVersionNumber] = useState(''); // Nouveau champ pour le numéro de version
   const [gameVersions, setGameVersions] = useState([]);
   const [testDuration, setTestDuration] = useState('');
   const [testCompleted, setTestCompleted] = useState(''); // Pour indiquer si le test est terminé
@@ -68,6 +69,7 @@ const CreateReport = () => {
       date,
       gameName,
       testType,
+      gameVersionNumber, // Ajout du numéro de version dans les données du rapport
       gameVersions,
       testDuration,
       testCompleted,
@@ -130,6 +132,14 @@ const CreateReport = () => {
             <option value="Smoke">Smoke</option>
             <option value="Functionality">Functionality</option>
           </select>
+        </div>
+        <div>
+          <label>Numéro de Version du Jeu:</label>
+          <input 
+            type="text" 
+            value={gameVersionNumber} 
+            onChange={(e) => setGameVersionNumber(e.target.value)} 
+          />
         </div>
         <div>
           <label>Version du Jeu:</label>
