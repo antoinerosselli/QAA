@@ -150,13 +150,11 @@ body {
   background: #4752c4; /* Slightly lighter on hover */
 }
 
-/* Style des barres de défilement pour Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #5865f2 #2c2f33;
 }
 
-/* Style des barres de défilement pour Edge, Internet Explorer */
 * {
   -ms-overflow-style: none;
 }

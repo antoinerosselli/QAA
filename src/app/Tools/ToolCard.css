@@ -1,0 +1,29 @@
+/* src/app/Tools/ToolCard.css */
+.tool-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .tool-card {
+    padding: 20px;
+    border-radius: 8px;
+    color: white;
+    margin: 20px;
+    width: 300px; /* Taille fixe plus large */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+  }
+  
+  .tool-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .tool-card-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .tool-card-description {
+    font-size: 1em;
+  }
+  

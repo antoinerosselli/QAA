@@ -1,23 +1,27 @@
 // src/app/CreateReport/page.js
-"use client";  // Indique que ce fichier doit être exécuté côté client
+"use client";
 
 import React, { useState, useEffect } from 'react';
-import RankTitleLinkInput from './RankTitleLinkInput';  // Assure-toi d'importer correctement le composant
-import Modal from './Modal';  // Assure-toi d'importer correctement le composant
-import './global.css';  // Import des styles globaux
+import RankTitleLinkInput from './RankTitleLinkInput';
+import LevelTestedInput from './LevelTestedInput';
+import Modal from './Modal';
+import './global.css';
 
 const CreateReport = () => {
   const [date, setDate] = useState('');
   const [gameName, setGameName] = useState('');
   const [testType, setTestType] = useState('');
-  const [gameVersionNumber, setGameVersionNumber] = useState(''); // Nouveau champ pour le numéro de version
+  const [gameVersionNumber, setGameVersionNumber] = useState('');
   const [gameVersions, setGameVersions] = useState([]);
   const [testDuration, setTestDuration] = useState('');
-  const [testCompleted, setTestCompleted] = useState(''); // Pour indiquer si le test est terminé
-  const [additionalInfo, setAdditionalInfo] = useState(''); // Pour des informations complémentaires
+  const [testCompleted, setTestCompleted] = useState('');
+  const [additionalInfo, setAdditionalInfo] = useState('');
+  const [testedLanguages, setTestedLanguages] = useState('');
+  const [untestedLanguages, setUntestedLanguages] = useState('');
   const [items, setItems] = useState([]);
-  const [showModal, setShowModal] = useState(false);  // État pour contrôler la visibilité de la modal
-  const [reportData, setReportData] = useState({});  // État pour stocker les données du rapport
+  const [levels, setLevels] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [reportData, setReportData] = useState({});
 
   useEffect(() => {
     const today = new Date().toISOString().substr(0, 10);
@@ -28,9 +32,18 @@ const CreateReport = () => {
     setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false }]);
   };
 
+  const handleAddLevel = () => {
+    setLevels([...levels, { levelName: '', levelReview: '', selectedBugs: [] }]);
+  };
+
   const handleRemoveItem = (index) => {
     const newItems = items.filter((_, i) => i !== index);
     setItems(newItems);
+  };
+
+  const handleRemoveLevel = (index) => {
+    const newLevels = levels.filter((_, i) => i !== index);
+    setLevels(newLevels);
   };
 
   const handleRankChange = (index, value) => {
@@ -63,18 +76,39 @@ const CreateReport = () => {
     setItems(newItems);
   };
 
+  const handleLevelNameChange = (index, value) => {
+    const newLevels = [...levels];
+    newLevels[index].levelName = value;
+    setLevels(newLevels);
+  };
+
+  const handleLevelReviewChange = (index, value) => {
+    const newLevels = [...levels];
+    newLevels[index].levelReview = value;
+    setLevels(newLevels);
+  };
+
+  const handleSelectedBugsChange = (index, selectedValues) => {
+    const newLevels = [...levels];
+    newLevels[index].selectedBugs = selectedValues;
+    setLevels(newLevels);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const reportData = {
       date,
       gameName,
       testType,
-      gameVersionNumber, // Ajout du numéro de version dans les données du rapport
+      gameVersionNumber,
       gameVersions,
+      testedLanguages,
+      untestedLanguages,
       testDuration,
       testCompleted,
       additionalInfo,
-      items
+      items,
+      levels // Ajout des niveaux au rapport
     };
     setReportData(reportData);
     setShowModal(true);
@@ -155,6 +189,26 @@ const CreateReport = () => {
           </select>
         </div>
         <div>
+          <label>Langues Testées:</label>
+          <input 
+            type="text" 
+            value={testedLanguages} 
+            onChange={(e) => setTestedLanguages(e.target.value)} 
+            placeholder="Séparer par des virgules"
+            style={{ color: 'white' }}
+          />
+        </div>
+        <div>
+          <label>Langues Non Testées:</label>
+          <input 
+            type="text" 
+            value={untestedLanguages} 
+            onChange={(e) => setUntestedLanguages(e.target.value)} 
+            placeholder="Séparer par des virgules"
+            style={{ color: 'white' }}
+          />
+        </div>
+        <div>
           <label>Temps Passé (heures):</label>
           <input 
             type="number" 
@@ -208,8 +262,25 @@ const CreateReport = () => {
             handleRemove={handleRemoveItem}
           />
         ))}
+        {levels.map((level, index) => (
+          <LevelTestedInput
+            key={index}
+            index={index}
+            levelName={level.levelName}
+            levelReview={level.levelReview}
+            selectedBugs={level.selectedBugs}
+            setLevelName={handleLevelNameChange}
+            setLevelReview={handleLevelReviewChange}
+            setSelectedBugs={handleSelectedBugsChange}
+            bugs={items}
+            handleRemove={handleRemoveLevel}
+          />
+        ))}
 
         <button type="button" onClick={handleAddItem}>Ajouter un bug</button>
+        <button type="button" onClick={handleAddLevel}>Ajouter un niveau testé</button>
+        <br/>
+        <br/>
         <button type="submit">Créer le Rapport</button>
       </form>
       <Modal show={showModal} handleClose={() => setShowModal(false)} reportData={reportData} />
