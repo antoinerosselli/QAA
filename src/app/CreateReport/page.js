@@ -1,11 +1,10 @@
-// src/app/CreateReport/page.js
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import RankTitleLinkInput from './RankTitleLinkInput';
 import LevelTestedInput from './LevelTestedInput';
 import Modal from './Modal';
-import './global.css';
+import '../global.css';
 
 const CreateReport = () => {
   const [date, setDate] = useState('');
@@ -24,9 +23,43 @@ const CreateReport = () => {
   const [reportData, setReportData] = useState({});
 
   useEffect(() => {
-    const today = new Date().toISOString().substr(0, 10);
-    setDate(today);
+    const storedData = JSON.parse(localStorage.getItem('reportData'));
+    if (storedData) {
+      setDate(storedData.date || '');
+      setGameName(storedData.gameName || '');
+      setTestType(storedData.testType || '');
+      setGameVersionNumber(storedData.gameVersionNumber || '');
+      setGameVersions(storedData.gameVersions || []);
+      setTestDuration(storedData.testDuration || '');
+      setTestCompleted(storedData.testCompleted || '');
+      setAdditionalInfo(storedData.additionalInfo || '');
+      setTestedLanguages(storedData.testedLanguages || '');
+      setUntestedLanguages(storedData.untestedLanguages || '');
+      setItems(storedData.items || []);
+      setLevels(storedData.levels || []);
+    } else {
+      const today = new Date().toISOString().substr(0, 10);
+      setDate(today);
+    }
   }, []);
+
+  useEffect(() => {
+    const dataToStore = {
+      date,
+      gameName,
+      testType,
+      gameVersionNumber,
+      gameVersions,
+      testDuration,
+      testCompleted,
+      additionalInfo,
+      testedLanguages,
+      untestedLanguages,
+      items,
+      levels
+    };
+    localStorage.setItem('reportData', JSON.stringify(dataToStore));
+  }, [date, gameName, testType, gameVersionNumber, gameVersions, testDuration, testCompleted, additionalInfo, testedLanguages, untestedLanguages, items, levels]);
 
   const handleAddItem = () => {
     setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false }]);
@@ -186,6 +219,8 @@ const CreateReport = () => {
             <option value="GOG">GOG</option>
             <option value="EPIC">EPIC</option>
             <option value="SWITCH">SWITCH</option>
+            <option value="DRM FREE">DRM FREE</option>
+            <option value="DRM SDK FREE">DRM SDK FREE</option>
           </select>
         </div>
         <div>
@@ -278,6 +313,8 @@ const CreateReport = () => {
         ))}
 
         <button type="button" onClick={handleAddItem}>Ajouter un bug</button>
+        <br/>
+        <br/>
         <button type="button" onClick={handleAddLevel}>Ajouter un niveau testé</button>
         <br/>
         <br/>

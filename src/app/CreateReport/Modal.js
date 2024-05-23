@@ -1,4 +1,3 @@
-// src/app/CreateReport/Modal.js
 import React, { useRef } from 'react';
 import './Modal.css';
 
@@ -43,35 +42,41 @@ const Modal = ({ show, handleClose, reportData }) => {
 
   const generateContent = () => {
     return `
-      <div style="background: white; color: black; padding: 20px; font-family: Arial, sans-serif; line-height: 1.5;">
-        <h1 style="color: #5865F2;">Rapport Quotidien</h1>
-        <h2 style="color: #5865F2;">${reportData.gameName}[${reportData.gameVersions}] - ${reportData.gameVersionNumber} - ${reportData.date}</h2>
+      <div id="report-content" style="background: white; color: black; padding: 20px; font-family: Arial, sans-serif; line-height: 1.5;">
+        <p style="color: #000000;">Rapport Quotidien</p>
+        <p style="color: #000000;">${reportData.gameName}[${reportData.gameVersions}] - ${reportData.gameVersionNumber} - ${reportData.date}</p>
         <p>Bonjour,</p>
         <p>Veuillez trouver ci-dessous les détails du rapport :</p>
-        <br/>
         <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Informations Générales</h3>
-        <p><strong>Date :</strong> ${reportData.date}</p>
-        <p><strong>Nom du Jeu :</strong> ${reportData.gameName}</p>
-        <p><strong>Type de Test :</strong> ${reportData.testType}</p>
-        <p><strong>Numéro de Version du Jeu :</strong> ${reportData.gameVersionNumber}</p>
-        <p><strong>Versions du Jeu :</strong> ${reportData.gameVersions.join(', ')}</p>
-        <p><strong>Langues Testées :</strong> ${reportData.testedLanguages}</p>
-        <p><strong>Langues Non Testées :</strong> ${reportData.untestedLanguages}</p>
-        <p><strong>Temps Passé (heures) :</strong> ${reportData.testDuration}</p>
-        <p><strong>Test Terminé :</strong> ${reportData.testCompleted}</p>
+        <p><strong>Date :</strong> ${reportData.date}
         <br/>
+        <strong>Nom du Jeu :</strong> ${reportData.gameName}
+        <br/>
+        <strong>Type de Test :</strong> ${reportData.testType}
+        <br/>
+        <strong>Numéro de Version du Jeu :</strong> ${reportData.gameVersionNumber}
+        <br/>
+        <strong>Versions du Jeu :</strong> ${reportData.gameVersions.join(', ')}
+        <br/>
+        <strong>Langues Testées :</strong> ${reportData.testedLanguages}
+        <br/>
+        <strong>Langues Non Testées :</strong> ${reportData.untestedLanguages}
+        <br/>
+        <strong>Temps Passé (heures) :</strong> ${reportData.testDuration}
+        <br/>
+        <strong>Test Terminé :</strong> ${reportData.testCompleted}</p>
         <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Résumé des Bugs</h3>
-        <p><strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}</p>
-        <p><strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}</p>
+        <p><strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}
         <br/>
+        <strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}</p>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
           <p><strong style="background-color: #FF0000; color: white; padding: 5px;">A:</strong> ${rankCounts.A}</p>
           <p><strong style="background-color: #FFA500; color: white; padding: 5px;">B:</strong> ${rankCounts.B}</p>
           <p><strong style="background-color: #FFFF00; color: black; padding: 5px;">C:</strong> ${rankCounts.C}</p>
           <p><strong style="background-color: #808080; color: white; padding: 5px;">D:</strong> ${rankCounts.D}</p>
         </div>
-        <br/>
-        <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Détails des Bugs</h3>
+        ${reportData.items && reportData.items.length > 0 ? `
+        <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Niveaux Testés</h3>
         <br/>
         ${reportData.items.map((item, index) => `
           <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
@@ -82,6 +87,7 @@ const Modal = ({ show, handleClose, reportData }) => {
             <p><strong>Bloquant :</strong> ${item.isBlocking ? 'Oui' : 'Non'}</p>
           </div>
         `).join('')}
+        ` : ''}
 
         ${reportData.levels && reportData.levels.length > 0 ? `
           <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Niveaux Testés</h3>
@@ -104,14 +110,13 @@ const Modal = ({ show, handleClose, reportData }) => {
   };
 
   const handleCopy = () => {
-    const content = generateContent();
-
     const tempElement = document.createElement('div');
-    tempElement.innerHTML = content;
+    tempElement.innerHTML = generateContent();
     document.body.appendChild(tempElement);
 
+    const content = tempElement.querySelector('#report-content');
     const range = document.createRange();
-    range.selectNode(tempElement);
+    range.selectNode(content);
     window.getSelection().removeAllRanges();
     window.getSelection().addRange(range);
     document.execCommand('copy');

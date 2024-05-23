@@ -1,7 +1,7 @@
-// src/app/HomePage.js
 "use client";
 import React from 'react';
 import './HomePage.css';
+import './global.css';
 
 const HomePage = () => {
   return (

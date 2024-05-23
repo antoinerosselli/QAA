@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'normalize.css';
+
+/* Import local fonts */
+@font-face {
+  font-family: 'Jacquard 12';
+  src: url('../fonts/Jacquard12-Regular.ttf') format('truetype');
+  font: weight 400px;;
+  font-style: normal;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;       /* White for text */
+  --background-rgb: 0, 0, 0;             /* Black for background */
+  --secondary-rgb: 128, 128, 128;        /* Gray for secondary text */
+  --accent-rgb: 255, 255, 255;           /* White for borders and accents */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-rgb: 0, 0, 0;
+    --secondary-rgb: 128, 128, 128;
+    --accent-rgb: 255, 255, 255;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
+}
+
+.sorastyle{
+  font-family: 'Jacquard 12', system-ui, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, #000000, #000000);
+    animation: move 10s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes move {
+    0% {
+      transform: translate(-50%, -50%);
+    }
+    50% {
+      transform: translate(0%, 0%);
+    }
+    100% {
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .border-thick {
+    border: 2px solid rgb(var(--accent-rgb)); /* Thick white border */
+  }
+
+  .bg-dark {
+    background-color: rgb(var(--background-rgb));
+  }
+
+  .text-secondary {
+    color: rgb(var(--secondary-rgb));
+  }
+
+  .uppercase {
+    text-transform: uppercase;
+  }
+}
+
+/* Example utility classes for specific elements */
+.navbar {
+  @apply flex justify-between items-center bg-dark p-4 border-b-2 border-thick;
+}
+
+.navbar-logo a {
+  @apply text-white text-lg font-bold;
+}
+
+.navbar-links {
+  @apply flex list-none m-0 p-0;
+}
+
+.navbar-links li {
+  @apply mx-4;
+}
+
+.navbar-links a {
+  @apply text-secondary no-underline transition-colors duration-300;
+}
+
+.navbar-links a:hover {
+  @apply text-white;
+}
+
+.home-container {
+  @apply max-w-3xl mx-auto my-4 p-8 bg-dark border-thick text-center;
+}
+
+h1 {
+  @apply text-white uppercase mb-4;
+}
+
+p {
+  @apply text-secondary my-4;
+}
+
+.github-button {
+  @apply inline-flex items-center p-3 bg-dark text-white border-thick no-underline font-bold transition-colors duration-300;
+}
+
+.github-button:hover {
+  @apply bg-white text-black;
+}
+
+.github-button img {
+  @apply mr-2 w-6 h-6;
+}
+
+/* src/app/CreateReport/globals.css */
+body {
+  font-family: 'Courier New', Courier, monospace; /* Style rétro */
+  background-color: #000000; /* Fond noir */
+  margin: 0;
+  padding: 0;
+  color: #FFFFFF; /* Texte blanc */
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #000000; /* Fond noir */
+  border: 2px solid #FFFFFF; /* Bordure blanche épaisse */
+  box-shadow: none; /* Pas d'ombre */
+  border-radius: 0; /* Pas de bordures arrondies */
+}
+
+.checkbox-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 5px;
+  transform: scale(1.2); /* Agrandit la case à cocher */
+}
+
+h1, h3 {
+  color: #FFFFFF; /* Texte blanc */
+  text-transform: uppercase; /* Texte en majuscules */
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #808080; /* Gris pour le texte */
+}
+
+input, select {
+  width: calc(100% - 20px);
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #FFFFFF; /* Bordure blanche */
+  background-color: #000000; /* Fond noir */
+  color: #FFFFFF; /* Texte blanc */
+  border-radius: 0; /* Pas de bordures arrondies */
+}
+
+input::placeholder {
+  color: #808080; /* Gris pour les placeholders */
+}
+
+button {
+  background-color: #000000; /* Fond noir */
+  color: #FFFFFF; /* Texte blanc */
+  padding: 10px 20px;
+  border: 2px solid #FFFFFF; /* Bordure blanche épaisse */
+  border-radius: 0; /* Pas de bordures arrondies */
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #FFFFFF; /* Fond blanc */
+  color: #000000; /* Texte noir */
+}
+
+button[type="button"] {
+  background-color: #000000; /* Fond noir */
+  color: #FFFFFF; /* Texte blanc */
+}
+
+button[type="button"]:hover {
+  background-color: #FFFFFF; /* Fond blanc */
+  color: #000000; /* Texte noir */
+}
+
+button.close {
+  background-color: #000000; /* Fond noir */
+}
+
+button.close:hover {
+  background-color: #FFFFFF; /* Fond blanc */
+  color: #000000; /* Texte noir */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9); /* Fond noir avec opacité */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #000000; /* Fond noir */
+  padding: 20px;
+  border: 2px solid #FFFFFF; /* Bordure blanche épaisse */
+  max-width: 500px;
+  width: 100%;
+  box-shadow: none; /* Pas d'ombre */
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #FFFFFF; /* Texte blanc */
+}
+
+.modal p {
+  color: #808080; /* Texte gris */
+}
+
+.rank-distribution {
+  display: flex;
+  justify-content: space-between;
+  color: #FFFFFF; /* Texte blanc */
+}
+
+.rank-distribution p {
+  margin: 0 10px;
+}
+
+/* Style des barres de défilement pour WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000; /* Fond noir */
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #808080; /* Gris */
+  border-radius: 0;
+  border: 2px solid #000000; /* Bordure noire */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFFFFF; /* Blanc au survol */
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #808080 #000000; /* Gris et noir */
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+*::-ms-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-ms-scrollbar-track {
+  background: #000000; /* Fond noir */
+  border-radius: 0;
+}
+
+*::-ms-scrollbar-thumb {
+  background: #808080; /* Gris */
+  border-radius: 0;
+  border: 2px solid #000000; /* Bordure noire */
+}
+
+*::-ms-scrollbar-thumb:hover {
+  background: #FFFFFF; /* Blanc au survol */
+}
+

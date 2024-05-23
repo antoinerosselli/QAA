@@ -2,16 +2,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2C2F33;
+  background-color: #000000; /* Fond noir */
   padding: 10px 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #FFFFFF; /* Bordure blanche épaisse */
+  box-shadow: none; /* Pas d'ombre */
 }
 
 .navbar-logo a {
-  color: #FFFFFF;
+  color: #FFFFFF; /* Texte blanc */
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: bold;
+  font-family: 'Courier New', Courier, monospace; /* Style rétro */
 }
 
 .navbar-links {
@@ -26,12 +28,13 @@
 }
 
 .navbar-links a {
-  color: #99AAB5;
+  color: #808080; /* Texte gris */
   text-decoration: none;
   font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace; /* Style rétro */
   transition: color 0.3s ease;
 }
 
 .navbar-links a:hover {
-  color: #FFFFFF;
+  color: #FFFFFF; /* Texte blanc au survol */
 }

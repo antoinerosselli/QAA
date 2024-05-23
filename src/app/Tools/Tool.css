@@ -1,6 +1,8 @@
-.tool-card-link {
-  text-decoration: none;
-  color: inherit;
+.tools-container {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux cartes de retourner à la ligne */
+  gap: 20px; /* Espacement entre les cartes */
+  padding: 20px;
 }
 
 .tool-card {
@@ -9,7 +11,7 @@
   background-color: #000000; /* Fond sombre */
   color: #FFFFFF; /* Texte blanc */
   margin: 20px;
-  width: 100%; /* Utilisation de la largeur totale disponible */
+  width: calc(100% - 40px); /* Utilisation de la largeur totale disponible avec une marge */
   max-width: 300px; /* Taille maximale de la carte */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
@@ -20,13 +22,4 @@
 .tool-card:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée au survol */
-}
-
-.tool-card-title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.tool-card-description {
-  font-size: 1em;
 }
