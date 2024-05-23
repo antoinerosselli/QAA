@@ -1,9 +1,16 @@
 // src/app/CreateReport/Modal.js
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './Modal.css';
 
 const Modal = ({ show, handleClose, reportData }) => {
   const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (show && contentRef.current) {
+      // Force re-render to ensure styles are applied correctly
+      contentRef.current.innerHTML = generateContent();
+    }
+  }, [show]);
 
   if (!show) {
     return null;
