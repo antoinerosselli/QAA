@@ -23,8 +23,11 @@ const CreateReport = () => {
   const [reportData, setReportData] = useState({});
 
   useEffect(() => {
+    const today = new Date();
+    const formattedToday = `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth() + 1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+
     const storedData = JSON.parse(localStorage.getItem('reportData'));
-    if (storedData) {
+    if (storedData && storedData.date === formattedToday) {
       setDate(storedData.date || '');
       setGameName(storedData.gameName || '');
       setTestType(storedData.testType || '');
@@ -38,8 +41,8 @@ const CreateReport = () => {
       setItems(storedData.items || []);
       setLevels(storedData.levels || []);
     } else {
-      const today = new Date().toISOString().substr(0, 10);
-      setDate(today);
+      localStorage.clear();
+      setDate(formattedToday);
     }
   }, []);
 
@@ -141,7 +144,7 @@ const CreateReport = () => {
       testCompleted,
       additionalInfo,
       items,
-      levels // Ajout des niveaux au rapport
+      levels 
     };
     setReportData(reportData);
     setShowModal(true);
@@ -169,7 +172,6 @@ const CreateReport = () => {
   };
 
   const rankCounts = countRanks();
-
   return (
     <div className="container">
       <h1>Create a Report</h1>
@@ -218,6 +220,7 @@ const CreateReport = () => {
             <option value="STEAM">STEAM</option>
             <option value="GOG">GOG</option>
             <option value="EPIC">EPIC</option>
+            <option value="MS">MS</option>
             <option value="SWITCH">SWITCH</option>
             <option value="DRM FREE">DRM FREE</option>
             <option value="DRM SDK FREE">DRM SDK FREE</option>

@@ -70,17 +70,16 @@ const Modal = ({ show, handleClose, reportData }) => {
         <br/>
         <strong>Bugs Causant des Crashs :</strong> ${reportData.items.filter(item => item.isCrash).length}</p>
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <p><strong style="background-color: #FF0000; color: white; padding: 5px;">A:</strong> ${rankCounts.A}</p>
-          <p><strong style="background-color: #FFA500; color: white; padding: 5px;">B:</strong> ${rankCounts.B}</p>
-          <p><strong style="background-color: #FFFF00; color: black; padding: 5px;">C:</strong> ${rankCounts.C}</p>
-          <p><strong style="background-color: #808080; color: white; padding: 5px;">D:</strong> ${rankCounts.D}</p>
+          <p style="border: 2px solid ${getBorderColor("A")}"><strong style="background-color: #FF0000; color: black; padding: 5px;">A:</strong> ${rankCounts.A}</p>
+          <p style="border: 2px solid ${getBorderColor("B")}"><strong style="background-color: #FFA500; color: black; padding: 5px;">B:</strong> ${rankCounts.B}</p>
+          <p style="border: 2px solid ${getBorderColor("C")}"><strong style="background-color: #FFFF00; color: black; padding: 5px;">C:</strong> ${rankCounts.C}</p>
+          <p style="border: 2px solid ${getBorderColor("D")}"><strong style="background-color: #808080; color: black; padding: 5px;">D:</strong> ${rankCounts.D}</p>
         </div>
         ${reportData.items && reportData.items.length > 0 ? `
-        <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Niveaux Testés</h3>
+        <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Bugs :</h3>
         <br/>
         ${reportData.items.map((item, index) => `
           <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
-            <p><strong>Bug ${index + 1} :</strong></p>
             <p><strong>Rank :</strong> ${item.rank}</p>
             <p><strong>Titre :</strong> <a href="${item.link}" target="_blank" style="color: #5865F2;">${item.title}</a></p>
             <p><strong>Crash :</strong> ${item.isCrash ? 'Oui' : 'Non'}</p>

@@ -17,6 +17,12 @@ const Tools = () => {
       description: 'Tool for edit videos.',
       link: 'https://clipchamp.com/fr/video-editor/',
     },
+    {
+      title: 'OBS',
+      description: 'Software for video recording.',
+      link: 'https://obsproject.com/fr',
+    },
+
   ];
 
   return (
