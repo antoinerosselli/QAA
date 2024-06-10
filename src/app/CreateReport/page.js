@@ -224,6 +224,7 @@ const CreateReport = () => {
             <option value="SWITCH">SWITCH</option>
             <option value="DRM FREE">DRM FREE</option>
             <option value="DRM SDK FREE">DRM SDK FREE</option>
+            <option value="STEAM DECK">STEAM DECK</option>
           </select>
         </div>
         <div>
