@@ -82,8 +82,6 @@ const Modal = ({ show, handleClose, reportData }) => {
           <div style="border: 2px solid ${getBorderColor(item.rank)}; background: ${getBackgroundColor(item.rank)}; padding: 10px; margin-bottom: 10px;">
             <p><strong>Rank :</strong> ${item.rank}</p>
             <p><strong>Titre :</strong> <a href="${item.link}" target="_blank" style="color: #5865F2;">${item.title}</a></p>
-            <p><strong>Crash :</strong> ${item.isCrash ? 'Oui' : 'Non'}</p>
-            <p><strong>Bloquant :</strong> ${item.isBlocking ? 'Oui' : 'Non'}</p>
           </div>
         `).join('')}
         ` : ''}
