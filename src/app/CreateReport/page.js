@@ -9,6 +9,7 @@ import '../global.css';
 const CreateReport = () => {
   const [date, setDate] = useState('');
   const [gameName, setGameName] = useState('');
+  const [ticketlink, setTicketLink] = useState('');
   const [testType, setTestType] = useState('');
   const [gameVersionNumber, setGameVersionNumber] = useState('');
   const [gameVersions, setGameVersions] = useState([]);
@@ -30,6 +31,7 @@ const CreateReport = () => {
     if (storedData && storedData.date === formattedToday) {
       setDate(storedData.date || '');
       setGameName(storedData.gameName || '');
+      setTicketLink(storedData.ticketlink || '');
       setTestType(storedData.testType || '');
       setGameVersionNumber(storedData.gameVersionNumber || '');
       setGameVersions(storedData.gameVersions || []);
@@ -50,6 +52,7 @@ const CreateReport = () => {
     const dataToStore = {
       date,
       gameName,
+      ticketlink,
       testType,
       gameVersionNumber,
       gameVersions,
@@ -62,7 +65,7 @@ const CreateReport = () => {
       levels
     };
     localStorage.setItem('reportData', JSON.stringify(dataToStore));
-  }, [date, gameName, testType, gameVersionNumber, gameVersions, testDuration, testCompleted, additionalInfo, testedLanguages, untestedLanguages, items, levels]);
+  }, [date, gameName, ticketlink, testType, gameVersionNumber, gameVersions, testDuration, testCompleted, additionalInfo, testedLanguages, untestedLanguages, items, levels]);
 
   const handleAddItem = () => {
     setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false }]);
@@ -135,6 +138,7 @@ const CreateReport = () => {
     const reportData = {
       date,
       gameName,
+      ticketlink,
       testType,
       gameVersionNumber,
       gameVersions,
@@ -190,6 +194,14 @@ const CreateReport = () => {
             type="text" 
             value={gameName} 
             onChange={(e) => setGameName(e.target.value)} 
+          />
+        </div>
+        <div>
+          <label>Ticket :</label>
+          <input 
+            type="text" 
+            value={ticketlink} 
+            onChange={(e) => setTicketLink(e.target.value)} 
           />
         </div>
         <div>
