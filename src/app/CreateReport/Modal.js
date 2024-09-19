@@ -53,7 +53,6 @@ const Modal = ({ show, handleClose, reportData }) => {
         <strong>Nom du Jeu :</strong> ${reportData.gameName}
         <br/>
         <strong>Ticket du Test :</strong> <a href="${reportData.ticketlink}" target="_blank" style="color: #5865F2;">${reportData.ticketlink}</a></p>
-        <br/>
         <strong>Type de Test :</strong> ${reportData.testType}
         <br/>
         <strong>Numéro de Version du Jeu :</strong> ${reportData.gameVersionNumber}
@@ -66,7 +65,19 @@ const Modal = ({ show, handleClose, reportData }) => {
         <br/>
         <strong>Temps Passé (heures) :</strong> ${reportData.testDuration}
         <br/>
+        <strong>Crash Randoms :</strong> ${reportData.randomCrashes}
+        <br/>
+        <strong>Etat des achievements :</strong> ${reportData.achievementStatus}
+        <br/>
         <strong>Test Terminé :</strong> ${reportData.testCompleted}</p>
+        <br/>
+        <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Configuration du PC</h3>
+        <p><strong>Carte Graphique :</strong> ${reportData.pcConfig?.gpu || 'Non spécifiée'}
+        <br/>
+        <strong>Processeur :</strong> ${reportData.pcConfig?.cpu || 'Non spécifié'}
+        <br/>
+        <strong>RAM :</strong> ${reportData.pcConfig?.ram || 'Non spécifiée'}</p>
+
         <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Résumé des Bugs</h3>
         <p><strong>Bugs Bloquants :</strong> ${reportData.items.filter(item => item.isBlocking).length}
         <br/>
@@ -99,6 +110,7 @@ const Modal = ({ show, handleClose, reportData }) => {
             </div>
           `).join('')}
         ` : ''}
+
         <br/>
         <h3 style="color: #000000; text-decoration: underline; font-size: 1.2em;">Informations Complémentaires</h3>
         <p>${reportData.additionalInfo}</p>

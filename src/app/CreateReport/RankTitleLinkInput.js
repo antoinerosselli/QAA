@@ -52,6 +52,8 @@ const RankTitleLinkInput = ({ index, rank, title, link, isCrash, isBlocking, set
       <button type="button" onClick={() => handleRemove(index)} className="remove-button">Remove</button>
       <br/>
       <br/>
+      <br />
+      <br />
     </div>
   );
 }

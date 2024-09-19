@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import RankTitleLinkInput from './RankTitleLinkInput';
-import LevelTestedInput from './LevelTestedInput';
+import PcConfigInput from './ConfigPc';
 import Modal from './Modal';
 import '../global.css';
 
@@ -20,8 +20,12 @@ const CreateReport = () => {
   const [untestedLanguages, setUntestedLanguages] = useState('');
   const [items, setItems] = useState([]);
   const [levels, setLevels] = useState([]);
+  const [achievementStatus, setAchievementStatus] = useState(''); 
+  const [randomCrashes, setRandomCrashes] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [reportData, setReportData] = useState({});
+  const [pcConfig, setPcConfig] = useState({ gpu: '', cpu: '', ram: '' });
+  const [showPcConfig, setShowPcConfig] = useState(false);
 
   useEffect(() => {
     const today = new Date();
@@ -42,6 +46,8 @@ const CreateReport = () => {
       setUntestedLanguages(storedData.untestedLanguages || '');
       setItems(storedData.items || []);
       setLevels(storedData.levels || []);
+      setAchievementStatus(storedData.achievementStatus || ''); 
+      setRandomCrashes(storedData.randomCrashes || 0); 
     } else {
       localStorage.clear();
       setDate(formattedToday);
@@ -62,10 +68,17 @@ const CreateReport = () => {
       testedLanguages,
       untestedLanguages,
       items,
-      levels
+      achievementStatus, 
+      randomCrashes,
+      pcConfig,
     };
     localStorage.setItem('reportData', JSON.stringify(dataToStore));
-  }, [date, gameName, ticketlink, testType, gameVersionNumber, gameVersions, testDuration, testCompleted, additionalInfo, testedLanguages, untestedLanguages, items, levels]);
+  }, [date, gameName, ticketlink, testType, gameVersionNumber, gameVersions, testDuration, testCompleted, additionalInfo, testedLanguages, untestedLanguages, items, levels, achievementStatus, randomCrashes,pcConfig]);
+
+  const handleRemovePcConfig = () => {
+    setPcConfig({ gpu: '', cpu: '', ram: '' }); 
+    setShowPcConfig(false);
+  };
 
   const handleAddItem = () => {
     setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false }]);
@@ -148,7 +161,10 @@ const CreateReport = () => {
       testCompleted,
       additionalInfo,
       items,
-      levels 
+      levels,
+      achievementStatus, 
+      randomCrashes,
+      pcConfig,
     };
     setReportData(reportData);
     setShowModal(true);
@@ -267,6 +283,25 @@ const CreateReport = () => {
             onChange={(e) => setTestDuration(e.target.value)} 
           />
         </div>
+         <div>
+          <label>Nombre de Crashs Random:</label>
+          <input 
+            type="number" 
+            value={randomCrashes} 
+            onChange={(e) => setRandomCrashes(parseInt(e.target.value) || 0)} 
+            min="0"
+          />
+        </div>
+        <div>
+          <label>État des Succès:</label>
+          <select value={achievementStatus} onChange={(e) => setAchievementStatus(e.target.value)}>
+            <option value="">Sélectionner une option</option>
+            <option value="Tous débloquables">Tous débloquables</option>
+            <option value="Partiellement débloquable">Partiellement débloquable</option>
+            <option value="Pas déblocable">Pas déblocable</option>
+            <option value="N/A">N/A</option>
+          </select>
+        </div>
         <div>
           <label>Test Terminé:</label>
           <select value={testCompleted} onChange={(e) => setTestCompleted(e.target.value)}>
@@ -313,25 +348,25 @@ const CreateReport = () => {
             handleRemove={handleRemoveItem}
           />
         ))}
-        {levels.map((level, index) => (
-          <LevelTestedInput
-            key={index}
-            index={index}
-            levelName={level.levelName}
-            levelReview={level.levelReview}
-            selectedBugs={level.selectedBugs}
-            setLevelName={handleLevelNameChange}
-            setLevelReview={handleLevelReviewChange}
-            setSelectedBugs={handleSelectedBugsChange}
-            bugs={items}
-            handleRemove={handleRemoveLevel}
-          />
-        ))}
+      
+        {showPcConfig && (
+        <PcConfigInput
+          gpu={pcConfig.gpu}
+          cpu={pcConfig.cpu}
+          ram={pcConfig.ram}
+          setGpu={(gpu) => setPcConfig({ ...pcConfig, gpu })}
+          setCpu={(cpu) => setPcConfig({ ...pcConfig, cpu })}
+          setRam={(ram) => setPcConfig({ ...pcConfig, ram })}
+          handleRemove={handleRemovePcConfig}
+        />
+      )}
 
         <button type="button" onClick={handleAddItem}>Ajouter un bug</button>
         <br/>
         <br/>
-        <button type="button" onClick={handleAddLevel}>Ajouter un niveau testé</button>
+        <button type="button" onClick={() => setShowPcConfig(!showPcConfig)}>
+        {showPcConfig ? 'Cacher Config PC' : 'Afficher Config PC'}
+        </button>
         <br/>
         <br/>
         <button type="submit">Créer le Rapport</button>
