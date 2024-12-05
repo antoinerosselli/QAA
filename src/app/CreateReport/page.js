@@ -213,7 +213,7 @@ const CreateReport = () => {
           />
         </div>
         <div>
-          <label>Ticket :</label>
+          <label>Ticket du test:</label>
           <input 
             type="text" 
             value={ticketlink} 
