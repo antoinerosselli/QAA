@@ -213,7 +213,7 @@ const CreateReport = () => {
           />
         </div>
         <div>
-          <label>Ticket du test:</label>
+          <label>Lien du ticket du test:</label>
           <input 
             type="text" 
             value={ticketlink} 
@@ -298,6 +298,7 @@ const CreateReport = () => {
             <option value="">Sélectionner une option</option>
             <option value="Tous débloquables">Tous débloquables</option>
             <option value="Partiellement débloquable">Partiellement débloquable</option>
+            <option value="Partiellement débloquable">Débloquable</option>
             <option value="Pas déblocable">Pas déblocable</option>
             <option value="N/A">N/A</option>
           </select>
