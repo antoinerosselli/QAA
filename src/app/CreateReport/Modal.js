@@ -52,7 +52,7 @@ const Modal = ({ show, handleClose, reportData }) => {
         <br/>
         <strong>Nom du Jeu :</strong> ${reportData.gameName}
         <br/>
-        <strong>Ticket du Test :</strong> <a href="${reportData.ticketlink}" target="_blank" style="color: #5865F2;">${reportData.ticketlink}</a></p>
+        <strong>Lien du ticket du Test :</strong> <a href="${reportData.ticketlink}" target="_blank" style="color: #5865F2;">${reportData.ticketlink}</a></p>
         <strong>Type de Test :</strong> ${reportData.testType}
         <br/>
         <strong>Numéro de Version du Jeu :</strong> ${reportData.gameVersionNumber}
