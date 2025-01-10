@@ -298,7 +298,7 @@ const CreateReport = () => {
             <option value="">Sélectionner une option</option>
             <option value="Tous débloquables">Tous débloquables</option>
             <option value="Partiellement débloquable">Partiellement débloquable</option>
-            <option value="Débloquable">Débloquable</option>
+            <option value="Déblocable">Déblocable</option>
             <option value="Pas déblocable">Pas déblocable</option>
             <option value="N/A">N/A</option>
           </select>
