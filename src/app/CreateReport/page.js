@@ -81,7 +81,7 @@ const CreateReport = () => {
   };
 
   const handleAddItem = () => {
-    setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false }]);
+    setItems([...items, { rank: '', title: '', link: '', isCrash: false, isBlocking: false,isReopen: false, isClosed: false }]);
   };
 
   const handleAddLevel = () => {
@@ -125,6 +125,18 @@ const CreateReport = () => {
   const handleBlockingChange = (index, value) => {
     const newItems = [...items];
     newItems[index].isBlocking = value;
+    setItems(newItems);
+  };
+
+    const handleReopenChange = (index, value) => {
+    const newItems = [...items];
+    newItems[index].isReopen = value;
+    setItems(newItems);
+  };
+
+  const handleRegressedChange = (index, value) => {
+    const newItems = [...items];
+    newItems[index].isClosed = value;
     setItems(newItems);
   };
 
@@ -213,7 +225,7 @@ const CreateReport = () => {
           />
         </div>
         <div>
-          <label>Lien du ticket du test:</label>
+          <label>Ticket :</label>
           <input 
             type="text" 
             value={ticketlink} 
@@ -298,7 +310,6 @@ const CreateReport = () => {
             <option value="">Sélectionner une option</option>
             <option value="Tous débloquables">Tous débloquables</option>
             <option value="Partiellement débloquable">Partiellement débloquable</option>
-            <option value="Déblocable">Déblocable</option>
             <option value="Pas déblocable">Pas déblocable</option>
             <option value="N/A">N/A</option>
           </select>
@@ -341,11 +352,15 @@ const CreateReport = () => {
             link={item.link}
             isCrash={item.isCrash}
             isBlocking={item.isBlocking}
+            isReopen={item.isReopen}
+            isClosed={item.isClosed}
             setRank={handleRankChange}
             setTitle={handleTitleChange}
             setLink={handleLinkChange}
             setIsCrash={handleCrashChange}
             setIsBlocking={handleBlockingChange}
+            setIsReopen={handleReopenChange}
+            setIsClosed={handleRegressedChange}
             handleRemove={handleRemoveItem}
           />
         ))}
