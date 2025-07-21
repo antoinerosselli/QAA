@@ -1,7 +1,13 @@
 // src/app/CreateReport/RankTitleLinkInput.js
 import React from 'react';
 
-const RankTitleLinkInput = ({ index, rank, title, link, isCrash, isBlocking, setRank, setTitle, setLink, setIsCrash, setIsBlocking, handleRemove }) => {
+const RankTitleLinkInput = ({
+  index, rank, title, link,
+  isCrash, isBlocking, isReopen, isRegressed,
+  setRank, setTitle, setLink,
+  setIsCrash, setIsBlocking, setIsReopen, setIsClosed,
+  handleRemove
+}) => {
   return (
     <div className="item">
       <h3>Bug {index + 1}</h3>
@@ -47,6 +53,24 @@ const RankTitleLinkInput = ({ index, rank, title, link, isCrash, isBlocking, set
             onChange={(e) => setIsBlocking(index, e.target.checked)} 
           />
           Bloquant
+        <div style={{ width: '100%', borderTop: '1px solid #ccc', margin: '8px 0'}}></div>
+        <span style={{ fontWeight: 'bold', display: 'block', marginBottom: '4px', marginLeft: '10px' }}>|Regression</span>
+        </label>
+        <label className="checkbox-label">
+          <input 
+            type="checkbox" 
+            checked={isReopen} 
+            onChange={(e) => setIsReopen(index, e.target.checked)} 
+          />
+          Reopen
+        </label>
+        <label className="checkbox-label">
+          <input 
+            type="checkbox" 
+            checked={isRegressed} 
+            onChange={(e) => setIsClosed(index, e.target.checked)} 
+          />
+          Closed
         </label>
       </div>
       <button type="button" onClick={() => handleRemove(index)} className="remove-button">Remove</button>
